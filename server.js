@@ -13,9 +13,11 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 app.use(express.json());
-app.use(express.static(path.join(__dirname, "public")));
 
-// MySQL Pool
+// ✅ Serve Vite production build
+app.use(express.static(path.join(__dirname, "dist")));
+
+// ===== MySQL Pool =====
 const pool = mysql.createPool({
   host: process.env.MYSQL_HOST,
   user: process.env.MYSQL_USER,
@@ -62,18 +64,14 @@ app.delete("/api/items/:id", async (req, res) => {
   res.json({ message: "Deleted successfully" });
 });
 
-// ROUTES
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "public/index.html"));
-});
-
-app.get("/admin", (req, res) => {
-  res.sendFile(path.join(__dirname, "public/admin.html"));
+// ✅ IMPORTANT: SPA fallback (must be LAST route)
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "dist", "index.html"));
 });
 
 // START
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 10000;
 
 app.listen(PORT, () => {
-  console.log(`🎩 Running at http://localhost:${PORT}`);
+  console.log(`🎩 Server running on port ${PORT}`);
 });
