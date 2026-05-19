@@ -8,7 +8,7 @@ import {
 
 interface Props { onBack: () => void; }
 
-const CONDITIONS = ['deadstock','near-mint','excellent','good','fair','beater'] as const;
+const CONDITIONS = ['good','renovated conditon'] as const;
 const COND_STYLES: Record<string,string> = {
   deadstock:'bg-emerald-500', 'near-mint':'bg-green-500', excellent:'bg-blue-500',
   good:'bg-yellow-500', fair:'bg-orange-500', beater:'bg-red-500',
