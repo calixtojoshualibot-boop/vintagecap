@@ -3,7 +3,7 @@ export interface Cap {
   name: string;
   team: string;
   year: number;
-  condition: 'deadstock' | 'near-mint' | 'excellent' | 'good' | 'fair' | 'beater';
+  condition: 'good' | 'renovated condition';
   price: number;
   description: string;
   image: string;
